@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Denver Should Build a Solar Farm</title>
+    <meta name="description" content="A data-driven case for grid-scale solar power on Colorado's Front Range. Denver has the sun, the land, the demand, and the math is overwhelming.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Denver Should Build a Solar Farm">
+    <meta property="og:description" content="Grid-scale solar on the Front Range: the math is overwhelming. A data-driven case inspired by Casey Handmer's Energy Predictions 2025.">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sun: #F59E0B;
+            --sun-light: #FCD34D;
+            --sun-dark: #D97706;
+            --green: #10B981;
+            --green-light: #34D399;
+            --red: #EF4444;
+            --red-light: #F87171;
+            --sky: #0EA5E9;
+            --bg-dark: #0B1120;
+            --bg-card: #111827;
+            --bg-card-hover: #1a2332;
+            --border: #1E293B;
+            --text: #E2E8F0;
+            --text-dim: #94A3B8;
+            --text-bright: #F8FAFC;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: rgba(11, 17, 32, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        nav .logo { font-weight: 800; font-size: 1.1rem; color: var(--text-bright); }
+        nav .logo span { color: var(--sun); }
+        nav .links { display: flex; gap: 1.5rem; }
+        nav .links a {
+            color: var(--text-dim); text-decoration: none; font-size: 0.85rem;
+            font-weight: 500; transition: color 0.2s;
+        }
+        nav .links a:hover { color: var(--sun); }
+
+        @media (max-width: 768px) {
+            nav .links { display: none; }
+            nav { padding: 0.75rem 1rem; }
+        }
+
+        /* SECTIONS */
+        section { padding: 5rem 2rem; max-width: 900px; margin: 0 auto; }
+        @media (max-width: 768px) { section { padding: 3rem 1.25rem; } }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900; line-height: 1.1;
+            color: var(--text-bright);
+            margin-bottom: 1.5rem;
+        }
+        h1 span { color: var(--sun); }
+
+        h2 {
+            font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+            font-weight: 800; line-height: 1.2;
+            color: var(--text-bright);
+            margin-bottom: 1rem;
+        }
+        h2 span { color: var(--sun); }
+
+        h3 {
+            font-size: 1.2rem; font-weight: 700;
+            color: var(--text-bright);
+            margin-bottom: 0.5rem;
+        }
+
+        p { margin-bottom: 1rem; color: var(--text); font-size: 1.05rem; }
+        p.dim { color: var(--text-dim); font-size: 0.9rem; }
+        p.lead { font-size: 1.15rem; line-height: 1.8; }
+
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--sun);
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex; flex-direction: column;
+            justify-content: center;
+            max-width: 900px; margin: 0 auto;
+            padding: 6rem 2rem 4rem;
+        }
+        .hero .subtitle {
+            font-size: 1.1rem; color: var(--text-dim);
+            margin-bottom: 2rem; max-width: 600px;
+        }
+        .hero-stats {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1.5rem; margin-top: 2rem;
+        }
+        .hero-stat .number {
+            font-family: var(--font-mono); font-size: 2rem;
+            font-weight: 700; color: var(--sun);
+        }
+        .hero-stat .label {
+            font-size: 0.8rem; color: var(--text-dim);
+            text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        .hero .source-note {
+            margin-top: 2.5rem; font-size: 0.85rem; color: var(--text-dim);
+            border-left: 2px solid var(--sun-dark); padding-left: 1rem;
+        }
+        .hero .source-note a { color: var(--sun); text-decoration: none; }
+        .hero .source-note a:hover { text-decoration: underline; }
+
+        /* CARDS */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* BLOCKQUOTE */
+        blockquote {
+            border-left: 3px solid var(--sun);
+            padding: 1.25rem 1.5rem;
+            margin: 2rem 0;
+            background: rgba(245, 158, 11, 0.05);
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            color: var(--text);
+        }
+        blockquote cite {
+            display: block; margin-top: 0.75rem;
+            font-style: normal; font-size: 0.85rem;
+            color: var(--sun); font-weight: 600;
+        }
+
+        /* BAR CHART */
+        .bar-chart { margin: 2rem 0; }
+        .bar-row {
+            display: flex; align-items: center; gap: 1rem;
+            margin-bottom: 0.75rem;
+        }
+        .bar-label {
+            min-width: 140px; font-size: 0.9rem;
+            font-weight: 500; text-align: right;
+            color: var(--text);
+        }
+        .bar-track {
+            flex: 1; height: 32px; background: rgba(255,255,255,0.05);
+            border-radius: 6px; overflow: hidden; position: relative;
+        }
+        .bar-fill {
+            height: 100%; border-radius: 6px;
+            display: flex; align-items: center;
+            padding: 0 0.75rem;
+            font-family: var(--font-mono); font-size: 0.8rem;
+            font-weight: 600; color: var(--bg-dark);
+            transition: width 0.8s ease;
+        }
+        .bar-fill.solar { background: linear-gradient(90deg, var(--sun-dark), var(--sun-light)); }
+        .bar-fill.gas { background: linear-gradient(90deg, #6B7280, #9CA3AF); }
+        .bar-fill.coal { background: linear-gradient(90deg, #4B5563, #6B7280); }
+        .bar-fill.wind { background: linear-gradient(90deg, var(--sky), #38BDF8); }
+        .bar-fill.denver { background: linear-gradient(90deg, var(--sun-dark), var(--sun)); }
+        .bar-fill.other { background: linear-gradient(90deg, #374151, #4B5563); }
+        .bar-fill.highlight {
+            background: linear-gradient(90deg, var(--sun-dark), var(--sun-light));
+            box-shadow: 0 0 12px rgba(245, 158, 11, 0.3);
+        }
+        .bar-value {
+            font-family: var(--font-mono); font-size: 0.85rem;
+            font-weight: 600; color: var(--text-dim);
+            min-width: 60px;
+        }
+
+        @media (max-width: 600px) {
+            .bar-label { min-width: 80px; font-size: 0.8rem; }
+            .bar-value { min-width: 40px; font-size: 0.75rem; }
+        }
+
+        /* STAT GRID */
+        .stat-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.25rem; margin: 2rem 0;
+        }
+        .stat-box {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 10px; padding: 1.5rem; text-align: center;
+        }
+        .stat-box .value {
+            font-family: var(--font-mono); font-size: 1.8rem;
+            font-weight: 700; color: var(--sun);
+        }
+        .stat-box .label {
+            font-size: 0.8rem; color: var(--text-dim);
+            text-transform: uppercase; letter-spacing: 0.05em;
+            margin-top: 0.25rem;
+        }
+
+        /* TABLE */
+        table {
+            width: 100%; border-collapse: collapse;
+            margin: 1.5rem 0; font-size: 0.95rem;
+        }
+        th, td { padding: 0.75rem 1rem; text-align: left; }
+        th {
+            background: rgba(255,255,255,0.03);
+            color: var(--text-dim); font-size: 0.8rem;
+            text-transform: uppercase; letter-spacing: 0.05em;
+            font-weight: 600; border-bottom: 1px solid var(--border);
+        }
+        td { border-bottom: 1px solid rgba(255,255,255,0.04); }
+        tr:hover td { background: rgba(255,255,255,0.02); }
+        td strong { color: var(--sun); }
+        td.green { color: var(--green); font-weight: 600; }
+        td.red { color: var(--red-light); font-weight: 600; }
+
+        /* TIMELINE */
+        .timeline { margin: 2rem 0; }
+        .timeline-item {
+            display: flex; gap: 1.5rem;
+            padding-bottom: 2rem;
+            position: relative;
+        }
+        .timeline-item:not(:last-child)::after {
+            content: ''; position: absolute;
+            left: 20px; top: 44px; bottom: 0;
+            width: 2px; background: var(--border);
+        }
+        .timeline-dot {
+            width: 42px; height: 42px; min-width: 42px;
+            background: var(--bg-card); border: 2px solid var(--sun);
+            border-radius: 50%; display: flex;
+            align-items: center; justify-content: center;
+            font-size: 1.1rem; z-index: 1;
+        }
+        .timeline-content h3 { margin-bottom: 0.25rem; }
+        .timeline-content p { color: var(--text-dim); font-size: 0.95rem; margin: 0; }
+
+        /* GRID LAYOUT */
+        .two-col {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 1.5rem; margin: 1.5rem 0;
+        }
+        @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px; padding: 1.5rem;
+        }
+        .feature-card .icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .feature-card h3 { font-size: 1.05rem; }
+        .feature-card p { font-size: 0.9rem; color: var(--text-dim); margin: 0; }
+
+        /* COST COLLAPSE CHART */
+        .cost-chart {
+            display: flex; align-items: flex-end; justify-content: space-between;
+            gap: 0.5rem; height: 250px; margin: 2rem 0;
+            padding: 0 0.5rem;
+            border-bottom: 2px solid var(--border);
+            border-left: 2px solid var(--border);
+            position: relative;
+        }
+        .cost-chart .y-label {
+            position: absolute; left: -2.5rem; top: 50%;
+            transform: rotate(-90deg) translateX(-50%);
+            font-size: 0.7rem; color: var(--text-dim);
+            white-space: nowrap;
+        }
+        .cost-bar-wrap {
+            display: flex; flex-direction: column;
+            align-items: center; flex: 1;
+        }
+        .cost-bar {
+            width: 100%; max-width: 60px;
+            background: linear-gradient(to top, var(--sun-dark), var(--sun-light));
+            border-radius: 4px 4px 0 0;
+            position: relative;
+            transition: height 0.5s ease;
+        }
+        .cost-bar .cost-val {
+            position: absolute; top: -22px; left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-mono); font-size: 0.7rem;
+            color: var(--sun-light); white-space: nowrap;
+            font-weight: 600;
+        }
+        .cost-bar-label {
+            margin-top: 0.5rem; font-size: 0.7rem;
+            color: var(--text-dim); text-align: center;
+        }
+
+        /* COMPARISON HIGHLIGHT */
+        .vs-box {
+            display: flex; align-items: center; gap: 2rem;
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 12px; padding: 2rem;
+            margin: 1.5rem 0; justify-content: center;
+            flex-wrap: wrap;
+        }
+        .vs-side { text-align: center; }
+        .vs-side .big {
+            font-family: var(--font-mono); font-size: 2.5rem;
+            font-weight: 700;
+        }
+        .vs-side .sublabel {
+            font-size: 0.8rem; color: var(--text-dim);
+            text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        .vs-divider {
+            font-size: 1.5rem; color: var(--text-dim); font-weight: 300;
+        }
+
+        /* CTA */
+        .cta {
+            text-align: center; padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(245,158,11,0.08), rgba(14,165,233,0.05));
+            border-radius: 16px; border: 1px solid var(--border);
+            margin: 2rem 0;
+        }
+        .cta h2 { margin-bottom: 1rem; }
+        .cta p { max-width: 600px; margin: 0 auto 1.5rem; }
+        .cta-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--sun-dark), var(--sun));
+            color: var(--bg-dark); font-weight: 700;
+            padding: 0.85rem 2rem; border-radius: 8px;
+            text-decoration: none; font-size: 1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(245, 158, 11, 0.3);
+        }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem; max-width: 900px; margin: 0 auto;
+        }
+        footer h3 { color: var(--text-dim); margin-bottom: 1rem; }
+        footer ul { list-style: none; }
+        footer li {
+            margin-bottom: 0.5rem; font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+        footer li a { color: var(--sun); text-decoration: none; }
+        footer li a:hover { text-decoration: underline; }
+        footer .footer-note {
+            margin-top: 2rem; font-size: 0.8rem; color: var(--text-dim);
+            border-top: 1px solid var(--border); padding-top: 1.5rem;
+        }
+
+        /* ANNOTATION */
+        .annotation {
+            background: rgba(245, 158, 11, 0.08);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            border-radius: 8px; padding: 1rem 1.25rem;
+            margin: 1.5rem 0; font-size: 0.9rem;
+        }
+        .annotation strong { color: var(--sun); }
+
+        /* DIVIDER */
+        .divider {
+            height: 1px; background: var(--border);
+            margin: 3rem 0;
+        }
+
+        /* LEARNING RATE BOX */
+        .lr-display {
+            display: flex; align-items: center; justify-content: center;
+            gap: 3rem; margin: 2rem 0; flex-wrap: wrap;
+        }
+        .lr-item { text-align: center; }
+        .lr-item .lr-val {
+            font-family: var(--font-mono); font-size: 3.5rem;
+            font-weight: 700; color: var(--sun);
+        }
+        .lr-item .lr-label {
+            font-size: 0.8rem; color: var(--text-dim);
+            text-transform: uppercase; letter-spacing: 0.05em;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">⚡ Denver<span>Solar</span>Grid</div>
+    <div class="links">
+        <a href="#cost">Cost Collapse</a>
+        <a href="#advantage">Denver's Edge</a>
+        <a href="#grid-problem">The Problem</a>
+        <a href="#economics">Economics</a>
+        <a href="#storage">Storage</a>
+        <a href="#datacenters">Datacenters</a>
+        <a href="#beyond">Beyond kWh</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+    <div class="section-label">A Data-Driven Case for Grid-Scale Solar</div>
+    <h1>Denver Should Build a <span>Solar Farm</span></h1>
+    <p class="subtitle">
+        The Mile High City sits under some of the most intense sunlight in America, next to thousands of acres of cheap, flat land. Grid-scale solar is now cheaper than running existing fossil plants. The math isn't close.
+    </p>
+
+    <div class="hero-stats">
+        <div class="hero-stat">
+            <div class="number">$24</div>
+            <div class="label">/MWh Solar LCOE</div>
+        </div>
+        <div class="hero-stat">
+            <div class="number">6.12</div>
+            <div class="label">DNI (kWh/m²/day)</div>
+        </div>
+        <div class="hero-stat">
+            <div class="number">63%</div>
+            <div class="label">CO Grid Still Fossil</div>
+        </div>
+        <div class="hero-stat">
+            <div class="number">48%</div>
+            <div class="label">Learning Rate</div>
+        </div>
+    </div>
+
+    <div class="source-note">
+        Inspired by Casey Handmer's <a href="https://caseyhandmer.wordpress.com/2025/12/08/energy-predictions-2025/" target="_blank">"Energy Predictions 2025"</a> — and grounded in real data from NREL, EIA, and the Colorado energy market. March 2026.
+    </div>
+</div>
+
+<!-- SECTION 1: COST COLLAPSE -->
+<section id="cost">
+    <div class="section-label">The Revolution</div>
+    <h2>Solar Costs Have <span>Collapsed</span>. They're Still Falling.</h2>
+
+    <p class="lead">
+        Since 1976, solar PV module costs have fallen from <strong>$100/watt to under $0.07/watt</strong> — a 1,400x reduction. The production-weighted learning rate is <strong>48%</strong>: for every doubling of cumulative global production, costs drop by nearly half. This isn't slowing down. It's accelerating.
+    </p>
+
+    <div class="lr-display">
+        <div class="lr-item">
+            <div class="lr-val">48%</div>
+            <div class="lr-label">Production-Weighted<br>Learning Rate</div>
+        </div>
+        <div class="lr-item">
+            <div class="lr-val">1,400×</div>
+            <div class="lr-label">Cost Reduction<br>Since 1976</div>
+        </div>
+        <div class="lr-item">
+            <div class="lr-val">446 GW</div>
+            <div class="lr-label">Deployed<br>in 2024 Alone</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <p class="dim" style="margin-bottom:0.5rem; font-family: var(--font-mono); font-size: 0.75rem;">SOLAR PV MODULE COST — 50 YEARS OF COLLAPSE</p>
+        <div class="cost-chart">
+            <div class="cost-bar-wrap">
+                <div class="cost-bar" style="height: 240px;"><span class="cost-val">$100</span></div>
+                <div class="cost-bar-label">1976</div>
+            </div>
+            <div class="cost-bar-wrap">
+                <div class="cost-bar" style="height: 192px;"><span class="cost-val">$60</span></div>
+                <div class="cost-bar-label">1980</div>
+            </div>
+            <div class="cost-bar-wrap">
+                <div class="cost-bar" style="height: 48px;"><span class="cost-val">$8.00</span></div>
+                <div class="cost-bar-label">1990</div>
+            </div>
+            <div class="cost-bar-wrap">
+                <div class="cost-bar" style="height: 30px;"><span class="cost-val">$4.50</span></div>
+                <div class="cost-bar-label">2000</div>
+            </div>
+            <div class="cost-bar-wrap">
+                <div class="cost-bar" style="height: 14px;"><span class="cost-val">$1.50</span></div>
+                <div class="cost-bar-label">2010</div>
+            </div>
+            <div class="cost-bar-wrap">
+                <div class="cost-bar" style="height: 5px;"><span class="cost-val">$0.25</span></div>
+                <div class="cost-bar-label">2020</div>
+            </div>
+            <div class="cost-bar-wrap">
+                <div class="cost-bar" style="height: 3px;"><span class="cost-val">$0.07</span></div>
+                <div class="cost-bar-label">2025</div>
+            </div>
+        </div>
+        <p class="dim">Module cost per watt. In 2024 alone, the world deployed 446 GW of solar — equivalent to the entire global nuclear fleet. China deployed 160 GW in just 9 months. Data: Casey Handmer / IRENA / BloombergNEF</p>
+    </div>
+
+    <p>This isn't a government subsidy story. It's a manufacturing learning curve — the same force that made computers, LEDs, and lithium batteries cheap. Every factory built, every panel deployed, every year of accumulated production makes the next panel cheaper. And we're nowhere near the floor.</p>
+
+    <blockquote>
+        "Solar panels are a revolutionary technology — inert glass rectangles that, placed on the ground, print out wealth at roughly 100x the rate of the best farm land."
+        <cite>— Casey Handmer, Terraform Industries</cite>
+    </blockquote>
+
+    <p>At the grid scale, this cost collapse changes everything. Utility-scale solar — with single-axis tracking on cheap land — now produces electricity at <strong>$24–31/MWh</strong> unsubsidized. That's cheaper than <em>operating</em> most existing coal and gas plants, before you even count construction costs.</p>
+
+    <div class="annotation">
+        <strong>What does this mean for Denver?</strong> It means a solar farm built today on Colorado's Eastern Plains generates electricity cheaper than the natural gas plants currently powering Denver's grid. Not in the future. Right now.
+    </div>
+</section>
+
+<!-- SECTION 2: DENVER'S ADVANTAGE -->
+<section id="advantage">
+    <div class="section-label">Denver's Edge</div>
+    <h2>Why the <span>Front Range</span> Is Built for Grid Solar</h2>
+
+    <p class="lead">
+        Denver isn't just sunny — it's <em>structurally advantaged</em> for solar power generation. High altitude, dry air, intense direct sunlight, and thousands of acres of flat, inexpensive land just east of the metro area.
+    </p>
+
+    <div class="card">
+        <p class="dim" style="margin-bottom:0.5rem; font-family: var(--font-mono); font-size: 0.75rem;">📡 REAL DATA FROM NREL SOLAR RESOURCE API — DIRECT NORMAL IRRADIANCE (kWh/m²/day)</p>
+        <div class="bar-chart">
+            <div class="bar-row">
+                <div class="bar-label">Phoenix, AZ</div>
+                <div class="bar-track"><div class="bar-fill solar" style="width: 100%;">7.35</div></div>
+                <div class="bar-value">7.35</div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">★ Denver, CO</div>
+                <div class="bar-track"><div class="bar-fill highlight" style="width: 83%;">6.12</div></div>
+                <div class="bar-value">6.12</div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">Los Angeles, CA</div>
+                <div class="bar-track"><div class="bar-fill other" style="width: 78%;">5.72</div></div>
+                <div class="bar-value">5.72</div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">Miami, FL</div>
+                <div class="bar-track"><div class="bar-fill other" style="width: 69%;">5.04</div></div>
+                <div class="bar-value">5.04</div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">Chicago, IL</div>
+                <div class="bar-track"><div class="bar-fill other" style="width: 51%;">3.72</div></div>
+                <div class="bar-value">3.72</div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">Seattle, WA</div>
+                <div class="bar-track"><div class="bar-fill other" style="width: 48%;">3.50</div></div>
+                <div class="bar-value">3.50</div>
+            </div>
+        </div>
+        <p class="dim">DNI measures direct beam sunlight — the most important component for solar electricity generation. Denver's high elevation and dry air give it a <strong style="color:var(--sun)">21% advantage over Miami</strong> and 7% over LA. Source: NREL Solar Resource API (Perez-SUNY/NREL, 2012).</p>
+    </div>
+
+    <div class="two-col">
+        <div class="feature-card">
+            <div class="icon">🏔️</div>
+            <h3>Mile-High Irradiance</h3>
+            <p>At 5,280 ft, Denver sits above ~15% of Earth's atmosphere. Less air = less light scatter = more direct beam energy hitting every panel. NREL data confirms: Denver's DNI beats Miami, LA, and most US cities.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🏜️</div>
+            <h3>Bone-Dry Air</h3>
+            <p>Denver's semi-arid climate means minimal humidity and haze. Water vapor in the atmosphere absorbs and scatters sunlight — Denver has almost none. Solar panels perform best in exactly these conditions.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">❄️</div>
+            <h3>Cold Panels, Hot Output</h3>
+            <p>Solar panels lose ~0.4% efficiency per °C above 25°C. Phoenix hits 115°F regularly — Denver rarely exceeds 95°F. Cooler panels produce more electricity per unit of sunlight received.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🌾</div>
+            <h3>The Eastern Plains</h3>
+            <p>Just 30 miles east of Denver: thousands of acres of flat, cheap agricultural land at $1,500–3,000/acre. Perfect for utility-scale solar arrays. Close enough to the Front Range load centers to minimize transmission costs.</p>
+        </div>
+    </div>
+
+    <div class="annotation">
+        <strong>"But isn't Denver too far north for solar?"</strong> — Denver is at 39.7°N, the same latitude as Madrid, Spain and Beijing, China. Latitude matters far less than cloud cover and atmospheric clarity. Denver has both clarity and 300 days of sunshine per year.
+    </div>
+
+    <div class="stat-grid">
+        <div class="stat-box">
+            <div class="value">6.12</div>
+            <div class="label">DNI (kWh/m²/day)</div>
+        </div>
+        <div class="stat-box">
+            <div class="value">5,280</div>
+            <div class="label">Feet Elevation</div>
+        </div>
+        <div class="stat-box">
+            <div class="value">34%</div>
+            <div class="label">Utility Capacity Factor</div>
+        </div>
+        <div class="stat-box">
+            <div class="value">300</div>
+            <div class="label">Days of Sun/Year</div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 3: THE GRID PROBLEM -->
+<section id="grid-problem">
+    <div class="section-label">The Problem</div>
+    <h2>Colorado's Grid Is <span>Dirty</span>, Expensive, and Falling Behind</h2>
+
+    <p class="lead">
+        Colorado's electricity grid remains <strong>63% fossil fuels</strong>. Natural gas is the primary energy source. The state emits <strong>958 lbs of CO₂ per MWh</strong> generated — the 16th worst carbon intensity in the nation. And demand is about to surge.
+    </p>
+
+    <div class="card">
+        <table>
+            <thead>
+                <tr>
+                    <th>Metric</th>
+                    <th>Colorado</th>
+                    <th>Context</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Primary Energy Source</td>
+                    <td><strong>Natural Gas</strong></td>
+                    <td>Volatile pricing, carbon-intensive</td>
+                </tr>
+                <tr>
+                    <td>Net Generation</td>
+                    <td><strong>58.8M MWh</strong></td>
+                    <td>28th nationally</td>
+                </tr>
+                <tr>
+                    <td>Net Summer Capacity</td>
+                    <td><strong>19,817 MW</strong></td>
+                    <td>22nd nationally</td>
+                </tr>
+                <tr>
+                    <td>CO₂ Intensity</td>
+                    <td class="red">958 lbs/MWh</td>
+                    <td>16th worst in the US</td>
+                </tr>
+                <tr>
+                    <td>CO₂ Emissions</td>
+                    <td class="red">25.6M metric tons</td>
+                    <td>27th nationally</td>
+                </tr>
+                <tr>
+                    <td>Avg Retail Price</td>
+                    <td><strong>12.07 ¢/kWh</strong></td>
+                    <td>Rising ~3% annually</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="dim">Source: EIA Colorado Electricity Profile 2024. CO₂ data: EPA eGRID.</p>
+    </div>
+
+    <h3 style="margin-top: 2rem;">Demand is about to explode</h3>
+    <p>Three forces are converging on Denver's grid simultaneously:</p>
+
+    <div class="two-col">
+        <div class="feature-card">
+            <div class="icon">🖥️</div>
+            <h3>Datacenter Boom</h3>
+            <p>Colorado's Front Range is one of the fastest-growing datacenter markets in the US. AI inference and training demand is outstripping grid capacity. Hyperscalers need gigawatts, not megawatts.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🚗</div>
+            <h3>EV Adoption</h3>
+            <p>Colorado has one of the fastest EV adoption rates in the country. Every EV added to the road is another ~3,500 kWh/year of electricity demand. Multiply by hundreds of thousands of vehicles.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🏗️</div>
+            <h3>Population Growth</h3>
+            <p>The Front Range corridor (Denver–Boulder–Fort Collins–Colorado Springs) continues to grow. More people = more homes, businesses, and cooling load as summers get hotter.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🔥</div>
+            <h3>Electrification</h3>
+            <p>Heat pumps replacing gas furnaces. Induction replacing gas stoves. Every appliance that switches from gas to electric adds grid load. The grid needs to grow — and it needs to grow clean.</p>
+        </div>
+    </div>
+
+    <div class="annotation">
+        <strong>The policy mandate is already set:</strong> Colorado's SB21-264 requires an <strong>80% GHG reduction by 2030</strong> for the electric sector. Xcel Energy has committed to 80% clean electricity by 2030. The question isn't <em>whether</em> Colorado decarbonizes its grid — it's <em>how fast</em> and <em>who benefits</em>.
+    </div>
+</section>
+
+<!-- SECTION 4: GRID-SCALE ECONOMICS -->
+<section id="economics">
+    <div class="section-label">The Numbers</div>
+    <h2>Grid-Scale Solar Is Now the <span>Cheapest</span> Electricity Ever</h2>
+
+    <p class="lead">
+        Utility-scale solar has crossed a threshold that changes everything: it is now cheaper to <em>build new solar</em> than to continue <em>operating existing</em> coal and gas plants. This has never been true of any new energy technology before.
+    </p>
+
+    <div class="card">
+        <p class="dim" style="margin-bottom:0.5rem; font-family: var(--font-mono); font-size: 0.75rem;">LEVELIZED COST OF ENERGY — UNSUBSIDIZED ($/MWh)</p>
+        <div class="bar-chart">
+            <div class="bar-row">
+                <div class="bar-label">Solar (Utility)</div>
+                <div class="bar-track"><div class="bar-fill solar" style="width: 20%;">$24–31</div></div>
+                <div class="bar-value" style="color: var(--green);">Cheapest</div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">Wind (Onshore)</div>
+                <div class="bar-track"><div class="bar-fill wind" style="width: 30%;">$25–50</div></div>
+                <div class="bar-value"></div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">Gas (CC)</div>
+                <div class="bar-track"><div class="bar-fill gas" style="width: 50%;">$45–75</div></div>
+                <div class="bar-value"></div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">Gas (Peaker)</div>
+                <div class="bar-track"><div class="bar-fill gas" style="width: 75%;">$115–175</div></div>
+                <div class="bar-value"></div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">Coal</div>
+                <div class="bar-track"><div class="bar-fill coal" style="width: 65%;">$65–150</div></div>
+                <div class="bar-value" style="color: var(--red-light);">Dying</div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">Nuclear (New)</div>
+                <div class="bar-track"><div class="bar-fill other" style="width: 90%;">$141–221</div></div>
+                <div class="bar-value"></div>
+            </div>
+        </div>
+        <p class="dim">LCOE = total lifetime cost ÷ total lifetime energy. Includes construction, financing, fuel, O&M, decommissioning. Data: Lazard LCOE Analysis v17.0, NREL ATB 2024, BNEF.</p>
+    </div>
+
+    <div class="vs-box">
+        <div class="vs-side">
+            <div class="big" style="color: var(--sun);">$0.80</div>
+            <div class="sublabel">Grid Solar $/W Installed</div>
+        </div>
+        <div class="vs-divider">vs.</div>
+        <div class="vs-side">
+            <div class="big" style="color: var(--text-dim);">$2.80</div>
+            <div class="sublabel">Residential $/W Installed</div>
+        </div>
+    </div>
+    <p class="dim" style="text-align: center;">Grid-scale solar costs 70% less per watt to install than rooftop. Economy of scale + single-axis tracking + no permitting per roof.</p>
+
+    <div class="divider"></div>
+
+    <h3>What a 200 MW Solar Farm Looks Like</h3>
+    <p>Imagine a utility-scale solar farm on the Eastern Plains, 30–50 miles east of Denver. Here's what the numbers say:</p>
+
+    <div class="stat-grid">
+        <div class="stat-box">
+            <div class="value">200</div>
+            <div class="label">MW Capacity</div>
+        </div>
+        <div class="stat-box">
+            <div class="value">~1,400</div>
+            <div class="label">Acres of Land</div>
+        </div>
+        <div class="stat-box">
+            <div class="value">580K</div>
+            <div class="label">MWh/Year Output</div>
+        </div>
+        <div class="stat-box">
+            <div class="value">53,000</div>
+            <div class="label">Homes Powered</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Estimate</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Installed Cost</td>
+                    <td><strong>~$160–200M</strong></td>
+                </tr>
+                <tr>
+                    <td>Annual Generation</td>
+                    <td><strong>~580,000 MWh</strong></td>
+                </tr>
+                <tr>
+                    <td>LCOE</td>
+                    <td class="green">$24–28/MWh</td>
+                </tr>
+                <tr>
+                    <td>CO₂ Displaced</td>
+                    <td><strong>~252,000 tons/year</strong></td>
+                </tr>
+                <tr>
+                    <td>Construction Jobs</td>
+                    <td><strong>300–500</strong></td>
+                </tr>
+                <tr>
+                    <td>Permanent O&M Jobs</td>
+                    <td><strong>20–35</strong></td>
+                </tr>
+                <tr>
+                    <td>Annual Tax Revenue</td>
+                    <td class="green">$1–2M to local county</td>
+                </tr>
+                <tr>
+                    <td>Land Lease Revenue</td>
+                    <td class="green">$800–1,200/acre/year</td>
+                </tr>
+                <tr>
+                    <td>Federal ITC (2026)</td>
+                    <td class="green">30% (still available for utility-scale)</td>
+                </tr>
+                <tr>
+                    <td>Payback Period</td>
+                    <td><strong>~6–8 years</strong></td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="dim">Estimates based on NREL ATB 2024, industry benchmarks, and Colorado-specific solar resource data (34% AC capacity factor, NREL Resource Class 1–2). Federal ITC of 30% applies to utility-scale projects through 2032 under the Inflation Reduction Act. Land lease rates based on industry averages for Colorado agricultural land converted to solar.</p>
+    </div>
+
+    <p>For rural Eastern Colorado counties, that tax revenue and those land lease payments are transformative. A rancher earning $50–100/acre/year on dryland wheat can earn <strong>10–20x more</strong> leasing the same land for solar — while keeping ownership and sometimes even grazing cattle between the rows.</p>
+
+    <div class="annotation">
+        <strong>The federal ITC matters:</strong> Unlike residential solar (where the tax credit was eliminated for cash/loan purchases in 2026), utility-scale projects still qualify for the <strong>30% Investment Tax Credit</strong> through 2032 under the Inflation Reduction Act. Energy community bonus credits may apply in coal-transition areas like Pueblo and Craig, pushing the effective credit even higher.
+    </div>
+</section>
+
+<!-- SECTION 5: STORAGE -->
+<section id="storage">
+    <div class="section-label">The Missing Piece</div>
+    <h2><span>Storage</span> Changes Everything. Again.</h2>
+
+    <p class="lead">
+        The #1 objection to solar: "But what about when the sun doesn't shine?" Battery costs have fallen even faster than solar. Grid-scale storage is now an economic no-brainer — and it makes solar fully dispatchable.
+    </p>
+
+    <div class="card">
+        <p class="dim" style="margin-bottom:0.5rem; font-family: var(--font-mono); font-size: 0.75rem;">BATTERY COST DECLINE — CELL LEVEL ($/kWh)</p>
+        <div class="cost-chart">
+            <div class="cost-bar-wrap">
+                <div class="cost-bar" style="height: 230px;"><span class="cost-val">$700+</span></div>
+                <div class="cost-bar-label">2013</div>
+            </div>
+            <div class="cost-bar-wrap">
+                <div class="cost-bar" style="height: 100px;"><span class="cost-val">$300</span></div>
+                <div class="cost-bar-label">2016</div>
+            </div>
+            <div class="cost-bar-wrap">
+                <div class="cost-bar" style="height: 52px;"><span class="cost-val">$156</span></div>
+                <div class="cost-bar-label">2019</div>
+            </div>
+            <div class="cost-bar-wrap">
+                <div class="cost-bar" style="height: 40px;"><span class="cost-val">$120</span></div>
+                <div class="cost-bar-label">2022</div>
+            </div>
+            <div class="cost-bar-wrap">
+                <div class="cost-bar" style="height: 15px;"><span class="cost-val">$45</span></div>
+                <div class="cost-bar-label">2025</div>
+            </div>
+        </div>
+        <p class="dim">LFP cell-level pricing. Pack costs ~50% higher. Learning rate: 23% per doubling. Data: BloombergNEF / Handmer.</p>
+    </div>
+
+    <blockquote>
+        "Batteries and transmission are in direct competition. Both enable electricity arbitrage. And while batteries have a fixed cost per MWh delivered that is falling ~10% per year, transmission lines get more expensive as they get longer. The outcome is not in doubt."
+        <cite>— Casey Handmer</cite>
+    </blockquote>
+
+    <h3 style="margin-top: 2rem;">What storage unlocks for Denver's grid</h3>
+
+    <div class="two-col">
+        <div class="feature-card">
+            <div class="icon">⚡</div>
+            <h3>Kill the Gas Peakers</h3>
+            <p>Gas peaker plants run only during peak demand and charge $115–175/MWh. A 4-hour battery charged by $24/MWh solar replaces them entirely — at a fraction of the cost and zero emissions.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🌙</div>
+            <h3>Solar After Dark</h3>
+            <p>4-hour duration batteries shift afternoon solar generation into the evening peak. Solar + storage becomes a 24-hour power source. Colorado's evening demand peak is perfectly matched by afternoon solar surplus.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🔋</div>
+            <h3>Grid Stability</h3>
+            <p>Batteries respond to grid frequency changes in milliseconds — faster than any turbine. They provide frequency regulation, voltage support, and spinning reserves better than the generators they replace.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🏠</div>
+            <h3>Distributed + Centralized</h3>
+            <p>Batteries at the solar farm, at substations, and behind every meter. As Handmer notes: "Market power will shift from monopoly utilities to confederations of illegible behind-the-meter demand in the form of networked batteries."</p>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h3>The Winter Question — Solved</h3>
+    <p>Seasonal storage remains the hardest problem. But Handmer identifies the key insight:</p>
+
+    <blockquote>
+        "Storing electricity for months is economically difficult, but storing heat is easy."
+        <cite>— Casey Handmer, referencing Standard Thermal</cite>
+    </blockquote>
+
+    <p><a href="https://www.standardthermal.com/" target="_blank" style="color: var(--sun);">Standard Thermal</a> is building ultra-low-cost thermal energy storage — essentially giant insulated sand batteries heated by excess summer solar. When winter comes, the heat is extracted. The storage medium is cheap, infinitely scalable, and self-insulating. Think of it as artificial geothermal powered by summer sun.</p>
+
+    <p>For Denver specifically: March is actually the highest solar production month (cool temps + rising sun angle + snow reflection). Even December — the worst month — produces 79% of peak output on a properly tilted array. The seasonal swing is far smaller than most people assume.</p>
+</section>
+
+<!-- SECTION 6: DATACENTERS -->
+<section id="datacenters">
+    <div class="section-label">The Opportunity</div>
+    <h2><span>Datacenters</span> Will Build Solar Whether Denver Does or Not</h2>
+
+    <p class="lead">
+        Here's the plot twist: the biggest consumers of electricity in the 2020s — AI datacenters — are already building their own captive solar plants. The question for Denver isn't whether to compete with datacenters for grid power. It's whether to be the place they build.
+    </p>
+
+    <blockquote>
+        "Datacenters are already building their own captive power plants. As AI demand outstrips production of gas turbines, hyperscalers will turn to offgrid solar+battery power systems, which are already competitive with pure gas or gas+solar in the sunnier parts of Earth."
+        <cite>— Casey Handmer</cite>
+    </blockquote>
+
+    <p>Handmer's most provocative prediction: <strong>datacenters will become net power sources for their communities.</strong></p>
+
+    <div class="card">
+        <h3>The Datacenter Math</h3>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot">📊</div>
+                <div class="timeline-content">
+                    <h3>10x Solar Overbuild</h3>
+                    <p>A datacenter that needs 100 MW constant builds a 1 GW solar array with batteries. This hits >99.5% uptime for GPUs — more reliable than grid power in most of the US.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot">⚡</div>
+                <div class="timeline-content">
+                    <h3>75% Curtailment = Free Power</h3>
+                    <p>That 1 GW array is curtailing roughly 75% of its generated power most of the time. That's hundreds of MW of clean electricity looking for a home.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot">🏘️</div>
+                <div class="timeline-content">
+                    <h3>Net Power Source</h3>
+                    <p>The datacenter sells its excess to the local grid at extremely competitive rates. The community gets access to cheap, clean power 99% of the time.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot">🔄</div>
+                <div class="timeline-content">
+                    <h3>Power Dynamics Flip</h3>
+                    <p>"Within five years, market power between utilities and datacenters will flip, with DCs becoming the preferred load growth power generation partner." — Handmer</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p>Denver's Front Range already hosts a growing cluster of datacenters. With its exceptional solar resource, cheap Eastern Plains land, and proximity to fiber backbone, Denver is a natural home for the next generation of solar-powered AI infrastructure.</p>
+
+    <div class="annotation">
+        <strong>The pitch to hyperscalers is simple:</strong> Build your next datacenter campus on Colorado's Eastern Plains. 6.12 DNI, flat land at $2,000/acre, <30 miles from Denver's fiber hubs, and a state government that's actively legislating toward 80% clean electricity. You don't need the grid. You <em>become</em> the grid.
+    </div>
+</section>
+
+<!-- SECTION 7: BEYOND ELECTRICITY -->
+<section id="beyond">
+    <div class="section-label">Beyond the kWh</div>
+    <h2>Solar Power Becomes <span>Chemical Feedstock</span></h2>
+
+    <p class="lead">
+        If all solar did was make electricity, it would already be revolutionary. But Handmer's most important insight is bigger: cheap solar power can be converted into <em>everything</em> we currently drill, mine, and burn.
+    </p>
+
+    <blockquote>
+        "Within the next five years, solar cost reductions will drive our process to be cost-preferred in all hydrocarbon import markets, and geological sources of oil and gas will never again be able to compete. Our grandchildren will be swimming in copious cheap energy and wondering what all that drilling was for."
+        <cite>— Casey Handmer, Terraform Industries</cite>
+    </blockquote>
+
+    <div class="card">
+        <h3>The Terraform Process</h3>
+        <p><a href="https://terraformindustries.com/" target="_blank" style="color: var(--sun);">Terraform Industries</a> is pioneering the conversion of cheap solar power, air, and water into synthetic natural gas and other hydrocarbons:</p>
+
+        <div class="timeline" style="margin-top: 1.5rem;">
+            <div class="timeline-item">
+                <div class="timeline-dot">☀️</div>
+                <div class="timeline-content">
+                    <h3>Cheap Solar Electricity</h3>
+                    <p>At $24/MWh and falling, solar provides the energy input.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot">💧</div>
+                <div class="timeline-content">
+                    <h3>Electrolysis → Hydrogen</h3>
+                    <p>Split water into hydrogen and oxygen using solar electricity.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot">🌬️</div>
+                <div class="timeline-content">
+                    <h3>CO₂ Capture from Air</h3>
+                    <p>Lime-calcite process captures CO₂ directly from the atmosphere.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot">⛽</div>
+                <div class="timeline-content">
+                    <h3>Synthetic Fuels</h3>
+                    <p>Combine H₂ + CO₂ → methane (CH₄), methanol (CH₃OH), and from methanol: DME, ethylene, propane, gasoline, kerosene, plastics — anything.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p>For Colorado, this means something profound: the state's sunshine becomes an <em>exportable commodity</em>. Not just electrons on a wire, but synthetic fuels, chemicals, and materials produced from solar power, air, and water. Colorado could become a net energy exporter — not by drilling, but by farming the sun.</p>
+
+    <div class="two-col">
+        <div class="feature-card">
+            <div class="icon">✈️</div>
+            <h3>Aviation Fuel</h3>
+            <p>Kerosene synthesized from solar power, air, and water. Carbon-neutral aviation. DIA becomes a hub for sustainable fuel.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🏭</div>
+            <h3>Industrial Chemicals</h3>
+            <p>Methanol is the universal precursor for plastics, paints, fertilizers, adhesives. Solar-powered chemical production on the Front Range.</p>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 8: CTA -->
+<section>
+    <div class="section-label">The Decision</div>
+    <h2>Denver Has <span>Everything</span>. The Only Question Is Speed.</h2>
+
+    <p class="lead">
+        The sun. The land. The demand. The policy alignment. The datacenter appetite. The federal incentives. The manufacturing learning curve that makes every year of delay more expensive than the last. Denver has every ingredient for a grid-scale solar revolution.
+    </p>
+
+    <div class="card">
+        <h3>What Denver has right now</h3>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot">☀️</div>
+                <div class="timeline-content">
+                    <h3>Top-tier solar resource</h3>
+                    <p>6.12 DNI — better than Miami, LA, and 90% of the country. Only the desert Southwest beats it.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot">🌾</div>
+                <div class="timeline-content">
+                    <h3>Cheap, flat land 30 miles away</h3>
+                    <p>Eastern Plains ag land at $1,500–3,000/acre, perfectly suited for single-axis tracking arrays. Minimal environmental conflict.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot">📈</div>
+                <div class="timeline-content">
+                    <h3>Exploding electricity demand</h3>
+                    <p>Datacenters, EVs, heat pumps, population growth. The grid needs to grow 30–50% this decade. Grow it clean or grow it dirty.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot">📋</div>
+                <div class="timeline-content">
+                    <h3>Policy already aligned</h3>
+                    <p>SB21-264 mandates 80% clean by 2030. Xcel's IRP calls for massive solar buildout. The regulatory runway is clear.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot">💰</div>
+                <div class="timeline-content">
+                    <h3>Federal money on the table</h3>
+                    <p>30% ITC through 2032. Energy community bonuses for coal-transition counties. This money expires — use it or lose it.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <blockquote>
+        "The universe has given us an infinitely powerful sun and a planetary crust composed largely of silicon. What we do with that is up to us."
+        <cite>— Casey Handmer</cite>
+    </blockquote>
+
+    <div class="cta">
+        <h2>The Math Is <span>Overwhelming</span></h2>
+        <p>Grid-scale solar is the cheapest electricity humanity has ever produced. Denver has one of the best solar resources in America. The only question is whether Denver leads or follows.</p>
+        <a href="https://caseyhandmer.wordpress.com/2025/12/08/energy-predictions-2025/" class="cta-btn" target="_blank">Read Handmer's Full Analysis →</a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p style="margin-bottom: 1.5rem;"><strong style="color: var(--text-bright);">The Case for Grid-Scale Solar in Denver</strong> — an independent, data-driven analysis. Not affiliated with any solar company, utility, or government agency.</p>
+
+    <h3>Sources & Data</h3>
+    <ul>
+        <li>→ <a href="https://caseyhandmer.wordpress.com/2025/12/08/energy-predictions-2025/" target="_blank">Casey Handmer — Energy Predictions 2025</a> — Primary source and analytical framework</li>
+        <li>→ <a href="https://caseyhandmer.wordpress.com/2024/11/09/solar-and-batteries-for-generic-use-cases/" target="_blank">Handmer — Solar and Batteries for Generic Use Cases</a></li>
+        <li>→ <a href="https://caseyhandmer.wordpress.com/2023/07/12/grid-storage-batteries-will-win/" target="_blank">Handmer — Grid Storage Batteries Will Win</a></li>
+        <li>→ <a href="https://caseyhandmer.wordpress.com/2024/03/12/how-to-feed-the-ais/" target="_blank">Handmer — How to Feed the AIs</a></li>
+        <li>→ <a href="https://developer.nrel.gov/docs/solar/solar-resource-v1/" target="_blank">NREL Solar Resource API</a> — DNI and irradiance data for Denver & comparison cities</li>
+        <li>→ <a href="https://atb.nrel.gov/electricity/2024/utility-scale_pv" target="_blank">NREL Annual Technology Baseline 2024</a> — Utility-scale PV cost and performance data</li>
+        <li>→ <a href="https://developer.nrel.gov/docs/solar/pvwatts/v8/" target="_blank">NREL PVWatts v8</a> — Production modeling for Colorado solar resource</li>
+        <li>→ <a href="https://www.eia.gov/electricity/state/colorado/" target="_blank">EIA — Colorado Electricity Profile 2024</a> — Generation, capacity, emissions, and pricing</li>
+        <li>→ <a href="https://www.epa.gov/egrid" target="_blank">EPA eGRID</a> — Colorado grid CO₂ emissions intensity</li>
+        <li>→ <a href="https://www.lazard.com/research-insights/levelized-cost-of-energyplus/" target="_blank">Lazard — Levelized Cost of Energy Analysis v17.0</a> — LCOE comparisons across technologies</li>
+        <li>→ <a href="https://terraformindustries.com/" target="_blank">Terraform Industries</a> — Synthetic fuels from solar power</li>
+        <li>→ <a href="https://www.standardthermal.com/" target="_blank">Standard Thermal</a> — Ultra-low-cost thermal energy storage</li>
+        <li>→ <a href="https://leg.colorado.gov/bills/sb21-264" target="_blank">Colorado SB21-264</a> — 80% GHG reduction mandate for electric sector by 2030</li>
+    </ul>
+
+    <div class="footer-note">
+        <p>Built March 2026. Analysis inspired by Casey Handmer's <em>Energy Predictions 2025</em>. Solar resource data from NREL Solar Resource API (Perez-SUNY/NREL, 2012). LCOE ranges from Lazard v17.0 and NREL ATB 2024. Colorado grid data from EIA 2024 profile. This site is for informational purposes only — intended to contribute to the public conversation about Denver's energy future.</p>
+        <p style="margin-top: 1rem;">
+            <a href="https://dariusatmar.github.io/denver-solar/" style="color: var(--sun); text-decoration: none;">← See also: The Case for Residential Solar in Denver</a>
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>

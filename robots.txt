@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://dariusatmar.github.io/denver-solar-grid/sitemap.xml
